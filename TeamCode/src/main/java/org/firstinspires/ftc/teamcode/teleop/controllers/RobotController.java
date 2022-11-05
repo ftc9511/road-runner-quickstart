@@ -10,6 +10,7 @@ public class RobotController {
     public MotorController motors;
     public LinearSlideController slide;
     public ClawController claw;
+    public ArmController arm;
     public Gamepad gamepad;
     public Telemetry telemetry;
 
@@ -19,5 +20,6 @@ public class RobotController {
         this.gamepad = gamepad;
         this.telemetry = telemetry;
         this.claw = new ClawController(map);
+        this.arm = new ArmController(map);
     }
 }
