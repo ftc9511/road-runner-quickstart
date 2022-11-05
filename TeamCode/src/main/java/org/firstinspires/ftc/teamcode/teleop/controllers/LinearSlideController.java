@@ -11,6 +11,7 @@ public class LinearSlideController {
 
     public LinearSlideController(HardwareMap map) {
         this.motor = map.get(DcMotor.class, "linear_slide");
+        this.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void extend() {}
     public void retract() {}
