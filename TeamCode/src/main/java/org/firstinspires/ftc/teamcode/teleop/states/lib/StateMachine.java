@@ -10,10 +10,8 @@ public class StateMachine {
     private Stack<RobotState> states;
     private RobotController controller;
     private RobotState previous_state;
-    private int currentStateTicks;
 
     public StateMachine(RobotState start_state, RobotController controller) {
-        this.currentStateTicks = 0;
         this.controller = controller;
         this.states = new Stack<RobotState>();
         this.states.push(start_state);
