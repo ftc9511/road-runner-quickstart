@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleop.states.lib;
 
-import com.qualcomm.robotcore.robot.Robot;
-
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 
 import java.util.Stack;
@@ -24,23 +22,21 @@ public class StateMachine {
     }
 
     public void run() {
-        // Run loop on our state
-        // If we have a new state, we need to push this to our stack and then run it's enter method
         this.controller.telemetry.addData("States: ", this.states);
         this.controller.telemetry.addData("Current State: ", this.currentState());
 
+        RobotState state;
         try {
-            RobotState new_state = this.currentState().loop(this.controller);
-            if (this.previous_state != new_state) {
-                // if the state has changed
-                this.states.push(new_state);
-                this.currentState().enter(this.controller);
-            }
-            this.previous_state = this.currentState();
-
+            // Get the new state
+            state = this.currentState().loop();
         } catch (NoNewStateException e) {
             // Fall back to previous state
             this.states.pop();
+            state = this.currentState();
+        }
+        if (state != this.currentState()) {
+            // If the state has changed, we need to run it's enter method
+            state.enter(this.controller);
         }
     }
 }
