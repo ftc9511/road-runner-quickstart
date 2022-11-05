@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.teleop.states.lib.RobotState;
 
 public class RobotMovingState extends RobotState {
     public void enter(RobotController controller) {}
-    public RobotState loop(RobotController controller) throws NoNewStateException {
+    public RobotState loop() throws NoNewStateException {
         // left goes up down left right
         // right rotates
 
@@ -21,7 +21,7 @@ public class RobotMovingState extends RobotState {
         }
         return this;
     }
-    public RobotState exit(RobotController controller) throws NoNewStateException {
+    public RobotState exit() throws NoNewStateException {
         throw new NoNewStateException();
     }
 }

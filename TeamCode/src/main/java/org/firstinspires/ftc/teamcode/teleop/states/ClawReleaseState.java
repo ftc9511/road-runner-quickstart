@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.states;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.NoNewStateException;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.RobotState;
+import org.firstinspires.ftc.teamcode.teleop.controllers.ClawController.ClawState;
 
 public class ClawReleaseState extends RobotState {
 
@@ -12,15 +13,15 @@ public class ClawReleaseState extends RobotState {
     }
 
     @Override
-    public RobotState loop(RobotController controller) throws NoNewStateException {
-        if (!controller.claw.isRetracted()) {
-            return this.exit(controller);
+    public RobotState loop() throws NoNewStateException {
+        if (!(controller.claw.state == ClawState.OPEN)) {
+            return this.exit();
         }
         return this;
     }
 
     @Override
-    public RobotState exit(RobotController controller) throws NoNewStateException {
+    public RobotState exit() throws NoNewStateException {
         throw new NoNewStateException(); // Go back to previous state
     }
 }

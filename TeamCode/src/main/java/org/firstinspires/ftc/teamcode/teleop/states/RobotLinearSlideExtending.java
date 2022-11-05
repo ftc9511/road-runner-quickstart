@@ -12,7 +12,7 @@ public class RobotLinearSlideExtending extends RobotState {
     }
 
     @Override
-    public RobotState loop(RobotController controller) throws NoNewStateException {
+    public RobotState loop() throws NoNewStateException {
         if (controller.slide.isExtended()) {
             // this.isDone = true;
         }
@@ -20,7 +20,7 @@ public class RobotLinearSlideExtending extends RobotState {
     }
 
     @Override
-    public RobotState exit(RobotController controller) throws NoNewStateException {
+    public RobotState exit() throws NoNewStateException {
         throw new NoNewStateException();
     }
 }

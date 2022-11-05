@@ -9,11 +9,11 @@ public class RobotIdleState extends RobotState {
     @Override
     public void enter(RobotController controller) {}
     @Override
-    public RobotState loop(RobotController controller) throws NoNewStateException {
+    public RobotState loop() throws NoNewStateException {
         return this;
     }
     @Override
-    public RobotState exit(RobotController controller) throws NoNewStateException {
+    public RobotState exit() throws NoNewStateException {
         throw new NoNewStateException();
     };
 }
