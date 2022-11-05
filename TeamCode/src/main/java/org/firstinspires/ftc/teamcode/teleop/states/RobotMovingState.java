@@ -19,6 +19,12 @@ public class RobotMovingState extends RobotState {
         if (controller.gamepad.left_trigger > 0) {
             return new ClawGrabState();
         }
+        if (controller.gamepad.dpad_up) {
+            return new RobotLinearSlideExtend();
+        }
+        if (controller.gamepad.dpad_down) {
+            return new RobotLinearSlideRetract();
+        }
         return this;
     }
     public RobotState exit() throws NoNewStateException {

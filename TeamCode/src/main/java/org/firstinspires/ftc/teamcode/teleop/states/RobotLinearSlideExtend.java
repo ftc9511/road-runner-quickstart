@@ -4,7 +4,7 @@ import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.NoNewStateException;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.RobotState;
 
-public class RobotLinearSlideExtending extends RobotState {
+public class RobotLinearSlideExtend extends RobotState {
 
     @Override
     public void enter(RobotController controller) {
