@@ -8,7 +8,6 @@ import org.firstinspires.ftc.teamcode.teleop.states.lib.StateMachine;
 
 
 public abstract class BaseRobot extends OpMode {
-    public Gamepad gamepad;
     public StateMachine machine;
     public RobotController controller;
 
