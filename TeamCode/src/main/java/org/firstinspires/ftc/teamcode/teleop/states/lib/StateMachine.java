@@ -13,6 +13,7 @@ public class StateMachine {
         this.controller = controller;
         this.states = new Stack<RobotState>();
         this.states.push(start_state);
+        this.currentState().enter(this.controller);
         this.controller.telemetry.addData("Initializing state machine with state ", this.currentState().getClass().getName());
         this.previous_state = this.currentState();
     }
