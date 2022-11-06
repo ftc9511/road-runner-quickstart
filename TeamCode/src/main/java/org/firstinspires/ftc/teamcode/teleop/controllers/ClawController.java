@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.teleop.controllers;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.teamcode.RobotConstants;
 
