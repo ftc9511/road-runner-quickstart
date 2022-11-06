@@ -3,11 +3,11 @@ package org.firstinspires.ftc.teamcode.teleop.controllers;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.teamcode.RobotConstants;
 
 
 public class LinearSlideController {
     private DcMotor motor;
-    private final int EXTEND_TICKS = -2250;
     private int RETRACT_TICKS;
 
     public LinearSlideController(HardwareMap map) {
@@ -18,7 +18,7 @@ public class LinearSlideController {
         this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void extend() {
-        this.motor.setTargetPosition(this.EXTEND_TICKS);
+        this.motor.setTargetPosition(RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
         this.motor.setPower(0.8);
     }
     public void retract() {
@@ -27,7 +27,7 @@ public class LinearSlideController {
     }
 
     public boolean isExtended() {
-        return this.EXTEND_TICKS < this.motor.getCurrentPosition() && this.motor.getCurrentPosition() < this.EXTEND_TICKS+200;
+        return RobotConstants.LINEAR_SLIDE_EXTEND_TICKS < this.motor.getCurrentPosition() && this.motor.getCurrentPosition() < RobotConstants.LINEAR_SLIDE_EXTEND_TICKS+200;
     }
 
     public boolean isRetracted() {

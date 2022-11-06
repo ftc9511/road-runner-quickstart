@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.teleop.controllers;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.RobotConstants;
+
 public class ArmController {
     private final Servo arm;
 
@@ -11,8 +13,6 @@ public class ArmController {
         LOWERED
     }
 
-    private double RAISED = 0.2688;
-    private double LOWERED = 0.0988;
     public ArmState state;
 
     public ArmController(HardwareMap map) {
@@ -22,12 +22,12 @@ public class ArmController {
     }
 
     public void lower() {
-        this.arm.setPosition(this.LOWERED);
+        this.arm.setPosition(RobotConstants.ARM_LOWERED);
         this.state = ArmState.LOWERED;
     }
 
     public void raise() {
-        this.arm.setPosition(this.RAISED);
+        this.arm.setPosition(RobotConstants.ARM_RAISED);
         this.state = ArmState.RAISED;
     }
 
