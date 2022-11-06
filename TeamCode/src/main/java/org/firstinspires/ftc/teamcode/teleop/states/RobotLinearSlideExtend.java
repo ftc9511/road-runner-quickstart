@@ -13,6 +13,7 @@ public class RobotLinearSlideExtend extends RobotState {
 
     @Override
     public RobotState loop() throws NoNewStateException {
+        this.controller.arm.lower();
         if (this.controller.slide.isExtended()) {
             return this.exit();
         }
