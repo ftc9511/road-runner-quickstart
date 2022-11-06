@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.teleop.states.RobotIdleState;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.StateMachine;
 
 
-@TeleOp(name = "(9511) BaseTeleOP")
+@TeleOp(name = "9511 Base TeleOP")
 public class BaseTeleOP extends BaseRobot {
 
     @Override
