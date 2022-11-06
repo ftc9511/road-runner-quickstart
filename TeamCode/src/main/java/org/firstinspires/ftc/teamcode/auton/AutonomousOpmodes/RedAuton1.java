@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.drive.AutonomousOpmodes;
+package org.firstinspires.ftc.teamcode.auton.AutonomousOpmodes;
 
 public class RedAuton1 extends BaseAutonomous9511{
     @Override

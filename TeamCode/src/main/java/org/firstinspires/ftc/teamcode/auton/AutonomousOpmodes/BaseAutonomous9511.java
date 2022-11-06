@@ -1,29 +1,19 @@
-package org.firstinspires.ftc.teamcode.auton.drive.AutonomousOpmodes;
+package org.firstinspires.ftc.teamcode.auton.AutonomousOpmodes;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.RobotConstants;
 import org.firstinspires.ftc.teamcode.auton.Vision.AprilTagDetectionPipeline;
 import org.firstinspires.ftc.teamcode.auton.drive.SampleMecanumDrive;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public abstract class BaseAutonomous9511 extends LinearOpMode {
 
@@ -47,13 +37,13 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     protected Servo leftGrabber;
     protected Servo rightGrabber;
 
-    protected double RAISED = 0.2688;
-    protected double LOWERED = 0.2688;
-    protected int EXTEND_TICKS = -2250;
-    protected double LEFT_OPEN = 0;
-    protected double LEFT_CLOSED = 0.4;
-    protected double RIGHT_OPEN = 1;
-    protected double RIGHT_CLOSED = 0.6;
+    protected double RAISED = RobotConstants.ARM_RAISED;
+    protected double LOWERED = RobotConstants.ARM_LOWERED;
+    protected int EXTEND_TICKS = RobotConstants.LINEAR_SLIDE_EXTEND_TICKS;
+    protected double LEFT_OPEN = RobotConstants.CLAW_LEFT_OPEN;
+    protected double LEFT_CLOSED = RobotConstants.CLAW_LEFT_CLOSED;
+    protected double RIGHT_OPEN = RobotConstants.CLAW_RIGHT_OPEN;
+    protected double RIGHT_CLOSED = RobotConstants.CLAW_RIGHT_CLOSED;
 
     protected void initRobot(){
         initState("Starting");
