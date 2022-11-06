@@ -11,8 +11,8 @@ public class ArmController {
         LOWERED
     }
 
-    private double RAISED = 0;
-    private double LOWERED = 0;
+    private double RAISED = 0.2688;
+    private double LOWERED = 0.0988;
     public ArmState state;
 
     public ArmController(HardwareMap map) {
