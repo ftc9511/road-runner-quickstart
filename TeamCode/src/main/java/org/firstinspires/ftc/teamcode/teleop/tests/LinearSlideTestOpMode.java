@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.tests;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="Linear Slide TeleOp Test")
 public class LinearSlideTestOpMode extends OpMode {
@@ -11,6 +12,9 @@ public class LinearSlideTestOpMode extends OpMode {
     @Override
     public void init() {
         this.linear_slide = hardwareMap.get(DcMotor.class, "linear_slide");
+        this.linear_slide.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.linear_slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        this.linear_slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
