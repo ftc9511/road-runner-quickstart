@@ -23,7 +23,7 @@ import java.util.List;
 public abstract class BaseAutonomous9511 extends LinearOpMode {
 
     protected SampleMecanumDrive drive;
-    protected ElapsedTime asyncTime = new ElapsedTime();
+    protected ElapsedTime runtime = new ElapsedTime();
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -193,6 +193,27 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
 
     protected void resetPose(SampleMecanumDrive drive){
         drive.setPoseEstimate(new Pose2d(0, 0, 0));
+    }
+
+    protected void resetPose(double x, double y) {
+        resetPose(x, y, 0);
+    }
+
+    protected void resetPose(double x, double y, double heading) {
+        drive.setPoseEstimate(new Pose2d(x, y, Math.toRadians(heading)));
+    }
+
+    protected void waitForStop() {
+        while (opModeIsActive()) {
+            idle();
+        }
+        stop();
+    }
+
+    protected void waitForTime(double milliseconds) {
+        while (opModeIsActive() && runtime.milliseconds() < milliseconds) {
+            idle();
+        }
     }
 
 
