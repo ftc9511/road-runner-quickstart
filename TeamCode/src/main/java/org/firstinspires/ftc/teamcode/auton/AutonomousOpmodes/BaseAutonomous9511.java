@@ -37,6 +37,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     int MIDDLE = 2;
     int RIGHT = 3;
     AprilTagDetection tagOfInterest = null;
+    int PARKINGTARGET = 1;
 
     protected DcMotorEx lift;
     protected Servo shoulder;
@@ -216,5 +217,13 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         }
     }
 
-
+    protected void detectSleeve(){
+        if(tagOfInterest.id == LEFT || tagOfInterest == null){
+            PARKINGTARGET = 1;
+        } else if (tagOfInterest.id == MIDDLE){
+            PARKINGTARGET = 2;
+        } else{
+            PARKINGTARGET = 3;
+        }
+    }
 }
