@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode.auton.AutonomousOpmodes;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.RobotConstants;
@@ -14,10 +17,13 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class BaseAutonomous9511 extends LinearOpMode {
 
     protected SampleMecanumDrive drive;
+    protected ElapsedTime asyncTime = new ElapsedTime();
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -44,6 +50,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     protected double LEFT_CLOSED = RobotConstants.CLAW_LEFT_CLOSED;
     protected double RIGHT_OPEN = RobotConstants.CLAW_RIGHT_OPEN;
     protected double RIGHT_CLOSED = RobotConstants.CLAW_RIGHT_CLOSED;
+    protected int ZERO_POSITION;
 
     protected void initRobot(){
         initState("Starting");
@@ -58,6 +65,10 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
 
         initState("Motors");
         lift = hardwareMap.get(DcMotorEx.class, "lift");
+        lift.setTargetPosition(lift.getCurrentPosition());
+        lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        lift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        ZERO_POSITION = lift.getCurrentPosition();
 
         initState("Vision");
         initVision();
@@ -179,5 +190,10 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
+
+    protected void resetPose(SampleMecanumDrive drive){
+        drive.setPoseEstimate(new Pose2d(0, 0, 0));
+    }
+
 
 }
