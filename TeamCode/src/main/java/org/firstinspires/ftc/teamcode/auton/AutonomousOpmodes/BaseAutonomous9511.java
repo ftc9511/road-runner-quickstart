@@ -66,6 +66,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         shoulder = hardwareMap.get(Servo.class, "shoulder");
         leftGrabber = hardwareMap.get(Servo.class, "left");
         rightGrabber = hardwareMap.get(Servo.class, "right");
+        grabbingPosition();
 
         initState("Motors");
         lift = hardwareMap.get(DcMotorEx.class, "lift");
@@ -241,5 +242,18 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         } else{
             PARKINGTARGET = 3;
         }
+    }
+
+    protected void grabbingPosition(){
+        shoulder.setPosition(LOWERED);
+        sleep(2000);
+        rightGrabber.setPosition(RIGHT_CLOSED);
+        leftGrabber.setPosition(LEFT_CLOSED);
+    }
+
+    protected void scoringPosition(boolean drop){
+        shoulder.setPosition(RAISED);
+        rightGrabber.setPosition(drop?RIGHT_OPEN:RIGHT_CLOSED);
+        leftGrabber.setPosition(drop?LEFT_OPEN:LEFT_CLOSED);
     }
 }
