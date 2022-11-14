@@ -13,20 +13,9 @@ public class ParkAuton extends BaseAutonomous9511{
 
         telemetryVision();
 
-        if(tagOfInterest.id == LEFT || tagOfInterest == null){
-            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .strafeLeft(24)
-                    .forward(30)
-                    .build());
-        } else if (tagOfInterest.id == MIDDLE){
-            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .forward(30)
-                    .build());
-        } else{
-            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .strafeRight(24)
-                    .forward(30)
-                    .build());
-        }
+        detectSleeve();
+
+        drive.followTrajectory(PARKINGTARGET == 1 ? parkLeft : PARKINGTARGET == 2 ? parkMiddle : parkRight);
+
     }
 }

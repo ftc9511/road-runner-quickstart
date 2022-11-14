@@ -23,6 +23,9 @@ import java.util.List;
 public abstract class BaseAutonomous9511 extends LinearOpMode {
 
     protected SampleMecanumDrive drive;
+    protected Trajectory parkLeft;
+    protected Trajectory parkRight;
+    protected Trajectory parkMiddle;
     protected ElapsedTime runtime = new ElapsedTime();
 
     OpenCvCamera camera;
@@ -70,6 +73,19 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         ZERO_POSITION = lift.getCurrentPosition();
+
+        initState("Trajectories");
+        parkLeft = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .strafeLeft(24)
+                .forward(30)
+                .build();
+        parkMiddle = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .forward(30)
+                .build();
+        parkRight = drive.trajectoryBuilder(drive.getPoseEstimate())
+                .strafeRight(24)
+                .forward(30)
+                .build();
 
         initState("Vision");
         initVision();
