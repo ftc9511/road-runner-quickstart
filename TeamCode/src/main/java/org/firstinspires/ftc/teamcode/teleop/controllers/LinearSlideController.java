@@ -11,7 +11,7 @@ public class LinearSlideController {
     private int RETRACT_TICKS;
 
     public LinearSlideController(HardwareMap map) {
-        this.motor = map.get(DcMotor.class, "linear_slide");
+        this.motor = map.get(DcMotor.class, "lift");
         this.RETRACT_TICKS = this.motor.getCurrentPosition();
         this.motor.setDirection(DcMotorSimple.Direction.REVERSE);
         this.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

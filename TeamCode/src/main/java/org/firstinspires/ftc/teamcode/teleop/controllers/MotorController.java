@@ -12,10 +12,10 @@ public class MotorController {
     public DcMotor[] motors;
 
     public MotorController(HardwareMap map) {
-        this.front_right = map.get(DcMotor.class, "front_left");
-        this.front_left = map.get(DcMotor.class, "front_right");
-        this.back_left = map.get(DcMotor.class, "back_left");
-        this.back_right = map.get(DcMotor.class, "back_right");
+        this.front_right = map.get(DcMotor.class, "fl");
+        this.front_left = map.get(DcMotor.class, "fr");
+        this.back_left = map.get(DcMotor.class, "bl");
+        this.back_right = map.get(DcMotor.class, "br");
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
     }
 
