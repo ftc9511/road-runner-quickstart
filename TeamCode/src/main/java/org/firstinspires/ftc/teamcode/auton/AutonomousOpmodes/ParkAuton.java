@@ -15,7 +15,18 @@ public class ParkAuton extends BaseAutonomous9511{
 
         detectSleeve();
 
-        drive.followTrajectory(PARKINGTARGET == 1 ? parkLeft : PARKINGTARGET == 2 ? parkMiddle : parkRight);
+        if (PARKINGTARGET == 1){
+            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                    .strafeLeft(24)
+                    .build());
+        } else if (PARKINGTARGET == 3){
+            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                    .strafeRight(24)
+                    .build());
+        }
+        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                .forward(24)
+                .build());
 
     }
 }
