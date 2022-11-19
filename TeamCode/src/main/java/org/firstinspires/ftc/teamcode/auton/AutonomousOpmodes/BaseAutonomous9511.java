@@ -64,7 +64,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         shoulder = hardwareMap.get(Servo.class, "shoulder");
         leftGrabber = hardwareMap.get(Servo.class, "left");
         rightGrabber = hardwareMap.get(Servo.class, "right");
-        grabbingPosition();
+//        grabbingPosition();
 
         initState("Motors");
         lift = hardwareMap.get(DcMotorEx.class, "lift");
