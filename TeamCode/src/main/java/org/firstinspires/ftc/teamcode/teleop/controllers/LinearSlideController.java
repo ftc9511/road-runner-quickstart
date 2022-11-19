@@ -26,6 +26,10 @@ public class LinearSlideController {
         this.motor.setPower(0.8);
     }
 
+    public void manualControl(double direction) {
+        this.motor.setPower(direction * 0.8);
+    }
+
     public boolean isExtended() {
         return RobotConstants.LINEAR_SLIDE_EXTEND_TICKS < this.motor.getCurrentPosition() && this.motor.getCurrentPosition() < RobotConstants.LINEAR_SLIDE_EXTEND_TICKS+200;
     }
