@@ -19,14 +19,20 @@ public class RobotMovingState extends RobotState {
         this.controller.motors.mecanumDrive(y, x, z);
 
         if (this.controller.gamepad.left_trigger > 0) {
-            return new ClawGrabState();
+            return new ClawInvertState();
         }
+
         if (this.controller.gamepad.dpad_up) {
             return new RobotLinearSlideExtend();
         }
         if (this.controller.gamepad.dpad_down) {
             return new RobotLinearSlideRetract();
         }
+
+        if (this.controller.gamepad.a) {
+            return new RobotArmInvertState();
+        }
+
         return this;
     }
     public RobotState exit() throws NoNewStateException {
