@@ -19,7 +19,7 @@ public class ClawController {
     public ClawController(HardwareMap map) {
         this.left = map.get(Servo.class, "left");
         this.right = map.get(Servo.class, "right");
-        this.expand();
+        // this.expand();
     }
 
     public void expand() {
