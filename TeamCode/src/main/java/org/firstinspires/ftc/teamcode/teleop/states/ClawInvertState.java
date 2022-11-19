@@ -14,10 +14,13 @@ public class ClawInvertState extends RobotState {
 
     @Override
     public RobotState loop() throws NoNewStateException {
-        if (this.controller.claw.state == ClawController.ClawState.OPEN) {
-            this.controller.claw.grab();
-        } else {
-            this.controller.claw.expand();
+        switch (this.controller.claw.state) {
+            case GRAB:
+                this.controller.claw.expand();
+                break;
+            case OPEN:
+                this.controller.claw.grab();
+                break;
         }
         return this.exit();
     }
