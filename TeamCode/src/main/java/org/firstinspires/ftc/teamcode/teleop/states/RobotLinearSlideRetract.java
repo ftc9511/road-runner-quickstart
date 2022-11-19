@@ -13,10 +13,7 @@ public class RobotLinearSlideRetract extends RobotState {
 
     @Override
     public RobotState loop() throws NoNewStateException {
-        if (this.controller.slide.isRetracted()) {
-            return this.exit();
-        }
-        return this;
+        return this.exit();
     }
 
     @Override
