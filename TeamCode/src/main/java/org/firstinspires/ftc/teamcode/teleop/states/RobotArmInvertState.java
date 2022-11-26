@@ -14,6 +14,7 @@ public class RobotArmInvertState extends RobotState {
                 break;
             case LOWERED:
                 this.controller.arm.raise();
+                break;
         }
     }
     @Override

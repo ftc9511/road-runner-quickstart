@@ -9,8 +9,6 @@ public class RobotMovingState extends RobotState {
         this.controller = controller;
     }
     public RobotState loop() throws NoNewStateException {
-        // left goes up down left right
-        // right rotates
 
         double x = -this.controller.gamepad.left_stick_y;
         double y = this.controller.gamepad.left_stick_x;
@@ -19,14 +17,11 @@ public class RobotMovingState extends RobotState {
         this.controller.motors.mecanumDrive(y, x, z);
 
         if (this.controller.gamepad.left_trigger > 0) {
-            return new ClawInvertState();
+            return new RobotClawInvertState();
         }
 
         if (this.controller.gamepad.dpad_up) {
-            return new RobotLinearSlideExtend();
-        }
-        if (this.controller.gamepad.dpad_down) {
-            return new RobotLinearSlideRetract();
+            return new RobotLinearSlideInvertState();
         }
 
         if (this.controller.gamepad.a) {

@@ -4,18 +4,24 @@ import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.NoNewStateException;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.RobotState;
 
-public class RobotArmLowerState extends RobotState {
+public class RobotLinearSlideInvertState extends RobotState {
+    public void enter(RobotController controller) {
+        if (controller.slide.isRetracted()) {
+            controller.slide.extend();
+        } else {
+            controller.slide.retract();
+        }
+    }
 
     @Override
-    public void enter(RobotController controller) {
-        this.controller.arm.lower();
-    }
-    @Override
     public RobotState loop() throws NoNewStateException {
-        return this;
+        return this.exit();
     }
+
     @Override
     public RobotState exit() throws NoNewStateException {
         throw new NoNewStateException();
     }
+
+
 }
