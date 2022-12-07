@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import org.firstinspires.ftc.teamcode.teleop.states.RobotMovingState;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.StateMachine;
 
-@TeleOp(name="9511 Movement TeleOP")
+@TeleOp(name="[FSM] 9511 Movement TeleOP")
 public class MovementTeleOP extends BaseTeleOP {
     @Override
     public void init() {
