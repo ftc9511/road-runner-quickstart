@@ -6,11 +6,7 @@ import org.firstinspires.ftc.teamcode.teleop.states.lib.RobotState;
 
 public class RobotLinearSlideInvertState extends RobotState {
     public void enter(RobotController controller) {
-        if (controller.slide.isRetracted()) {
-            controller.slide.extend();
-        } else {
-            controller.slide.retract();
-        }
+        controller.slide.invert();
     }
 
     @Override

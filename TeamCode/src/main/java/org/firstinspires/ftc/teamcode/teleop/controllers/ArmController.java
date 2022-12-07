@@ -7,13 +7,13 @@ import org.firstinspires.ftc.teamcode.RobotConstants;
 
 public class ArmController {
     private final Servo arm;
+    public ArmState state;
 
     public enum ArmState {
         RAISED,
         LOWERED
     }
 
-    public ArmState state;
 
     public ArmController(HardwareMap map) {
         this.arm = map.get(Servo.class, "shoulder");
@@ -29,6 +29,14 @@ public class ArmController {
     public void raise() {
         this.arm.setPosition(RobotConstants.ARM_RAISED);
         this.state = ArmState.RAISED;
+    }
+
+    public void invert() {
+        if (this.state == ArmState.RAISED) {
+            this.lower();
+        } else if (this.state == ArmState.LOWERED) {
+            this.raise();
+        }
     }
 
 }

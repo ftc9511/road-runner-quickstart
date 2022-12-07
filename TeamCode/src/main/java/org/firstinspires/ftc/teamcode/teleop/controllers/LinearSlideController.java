@@ -37,4 +37,12 @@ public class LinearSlideController {
     public boolean isRetracted() {
         return this.RETRACT_TICKS < this.motor.getCurrentPosition() && this.motor.getCurrentPosition() < this.RETRACT_TICKS+30;
     }
+
+    public void invert() {
+        if (this.isExtended()) {
+            this.retract();
+        } else if (this.isRetracted()) {
+            this.extend();
+        } // Otherwise, we are currently moving and thus should not change state
+    }
 }

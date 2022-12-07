@@ -13,14 +13,9 @@ public class RobotClawInvertState extends RobotState {
 
     @Override
     public RobotState loop() throws NoNewStateException {
-        switch (this.controller.claw.state) {
-            case GRAB:
-                this.controller.claw.expand();
-                break;
-            case OPEN:
-                this.controller.claw.grab();
-                break;
-        }
+        // The claw moves fast enough to where it most likely won't get in the way
+        // This is unsafe and creates a race condition but it's ok
+        this.controller.claw.invert();
         return this.exit();
     }
 
