@@ -32,10 +32,15 @@ public class CompetitionTeleOP extends BaseRobot {
         }
 
         if (this.controller.gamepad.dpad_up) {
-            this.controller.slide.extend();
+            // this.controller.slide.extend();
+            this.controller.slide.manualControl(1);
         }
         if (this.controller.gamepad.dpad_down) {
-            this.controller.slide.retract();
+            //this.controller.slide.retract();
+            this.controller.slide.manualControl(-1);
+        }
+        if (!(this.controller.gamepad.dpad_down | this.controller.gamepad.dpad_up)) {
+            this.controller.slide.manualControl(0);
         }
 
         if (this.controller.gamepad.a) {
