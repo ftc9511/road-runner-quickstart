@@ -4,8 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.RobotConstants;
-
 @TeleOp(name="Claw Test OpMode")
 public class ClawTestOpMode extends OpMode {
     private Servo left;
@@ -20,11 +18,14 @@ public class ClawTestOpMode extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.dpad_up) {
-            this.left.setPosition(RobotConstants.CLAW_LEFT_OPEN);
-            this.right.setPosition(RobotConstants.CLAW_RIGHT_OPEN);
+            this.left.setPosition(this.left.getPosition()+0.1);
         } else if (gamepad1.dpad_down) {
-            this.left.setPosition(RobotConstants.CLAW_LEFT_OPEN);
-            this.right.setPosition(RobotConstants.CLAW_RIGHT_OPEN);
+            this.left.setPosition(this.left.getPosition()-0.1);
+        }
+        if (gamepad1.dpad_left) {
+            this.right.setPosition(this.right.getPosition()+0.1);
+        } else if (gamepad1.dpad_right) {
+            this.right.setPosition(this.right.getPosition()-0.1);
         }
         telemetry.addData("left servo position: ", this.left.getPosition());
         telemetry.addData("right servo position: ", this.right.getPosition());
