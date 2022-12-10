@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.teleop.base.BaseRobot;
+import org.firstinspires.ftc.teamcode.teleop.controllers.ClawController;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 
 @TeleOp(name="[No-FSM] 9511 Movement TeleOP")
@@ -15,12 +16,17 @@ public class CompetitionTeleOP extends BaseRobot {
     public void init() {
         this.gamepad = gamepad1;
         this.controller = new RobotController(hardwareMap, telemetry, this.gamepad);
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {}
+        this.controller.claw.state = ClawController.ClawState.GRAB;
+        this.controller.claw.invert();
     }
 
     @Override
     public void loop() {
         // Calculate drivetrain values and apply them
-        double x = -this.controller.gamepad.left_stick_y;
+        double x = this.controller.gamepad.left_stick_y;
         double y = this.controller.gamepad.left_stick_x;
         double z = this.controller.gamepad.right_stick_x;
 
