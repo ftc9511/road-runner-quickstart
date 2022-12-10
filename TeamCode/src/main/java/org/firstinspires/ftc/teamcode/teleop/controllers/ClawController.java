@@ -19,6 +19,8 @@ public class ClawController {
     public ClawController(HardwareMap map) {
         this.left = map.get(Servo.class, "left");
         this.right = map.get(Servo.class, "right");
+        this.state = ClawState.GRAB;
+        this.invert();
     }
 
     public void invert() {
