@@ -19,7 +19,7 @@ public class RobotController {
         this.slide = new LinearSlideController(map);
         this.gamepad = gamepad;
         this.telemetry = telemetry;
-        this.claw = new ClawController(map);
         this.arm = new ArmController(map);
+        this.claw = new ClawController(map);
     }
 }
