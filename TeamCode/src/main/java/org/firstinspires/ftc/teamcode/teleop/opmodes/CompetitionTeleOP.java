@@ -33,7 +33,7 @@ public class CompetitionTeleOP extends BaseRobot {
         this.controller.motors.mecanumDrive(y, x, z);
 
         // Extremity movements
-        if (this.controller.gamepad.left_trigger > 0) {
+        if (this.controller.gamepad.right_trigger > 0) {
             this.controller.claw.invert();
         }
 
