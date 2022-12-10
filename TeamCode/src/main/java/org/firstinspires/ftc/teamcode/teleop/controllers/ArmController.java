@@ -17,8 +17,8 @@ public class ArmController {
 
     public ArmController(HardwareMap map) {
         this.arm = map.get(Servo.class, "shoulder");
-        this.state = ArmState.LOWERED;
-        this.lower();
+        this.state = ArmState.RAISED;
+        this.raise();
     }
 
     public void lower() {
