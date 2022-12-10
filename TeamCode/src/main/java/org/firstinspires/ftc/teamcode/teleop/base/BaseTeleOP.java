@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.teleop.base;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import org.firstinspires.ftc.teamcode.teleop.states.RobotIdleState;
 import org.firstinspires.ftc.teamcode.teleop.states.lib.StateMachine;
 
-
+@Disabled
 @TeleOp(name = "9511 Base TeleOP")
 public class BaseTeleOP extends BaseRobot {
 
