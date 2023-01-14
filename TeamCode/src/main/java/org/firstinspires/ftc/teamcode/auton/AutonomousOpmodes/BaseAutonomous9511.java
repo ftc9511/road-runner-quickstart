@@ -65,7 +65,6 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         shoulder = hardwareMap.get(Servo.class, "shoulder");
         leftGrabber = hardwareMap.get(Servo.class, "left");
         rightGrabber = hardwareMap.get(Servo.class, "right");
-        grabbingPosition();
 
         initState("Motors");
         lift = hardwareMap.get(DcMotorEx.class, "lift");
@@ -73,6 +72,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         lift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         ZERO_POSITION = lift.getCurrentPosition();
+        grabbingPosition(true);
 
         initState("Vision");
         initVision();
@@ -230,18 +230,18 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         }
     }
 
-    protected void grabbingPosition(){
+    protected void grabbingPosition(boolean start){
 //        shoulder.setPosition(LOWERED);
-        lift.setPower(1);
         lift.setTargetPosition(ZERO_POSITION);
+        lift.setPower(1);
 //        sleep(2000);
-        rightGrabber.setPosition(RIGHT_OPEN);
-        leftGrabber.setPosition(LEFT_OPEN);
+        rightGrabber.setPosition(start?RIGHT_CLOSED:RIGHT_OPEN);
+        leftGrabber.setPosition(start?LEFT_CLOSED:LEFT_OPEN);
     }
 
     protected void scoringPosition(boolean drop){
-        lift.setPower(1);
         lift.setTargetPosition(ZERO_POSITION+EXTEND_TICKS);
+        lift.setPower(1);
 //        shoulder.setPosition(RAISED);
         rightGrabber.setPosition(drop?RIGHT_OPEN:RIGHT_CLOSED);
         leftGrabber.setPosition(drop?LEFT_OPEN:LEFT_CLOSED);

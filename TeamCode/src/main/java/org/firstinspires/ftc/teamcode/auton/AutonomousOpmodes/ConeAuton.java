@@ -40,7 +40,6 @@ public class ConeAuton extends BaseAutonomous9511 {
                     .build());
         }
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .forward(24)
                 .forward(21)
                 .build());
     }
