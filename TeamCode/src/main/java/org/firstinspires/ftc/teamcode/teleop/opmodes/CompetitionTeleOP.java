@@ -33,8 +33,9 @@ public class CompetitionTeleOP extends BaseRobot {
         double x = this.controller.gamepad.left_stick_y;
         double y = this.controller.gamepad.left_stick_x;
         double z = this.controller.gamepad.right_stick_x;
+        boolean slow = this.controller.gamepad.left_bumper;
 
-        this.controller.motors.mecanumDrive(y, x, z);
+        this.controller.motors.mecanumDrive(y, x, z, slow);
 
         // Extremity movements
         if (this.controller.gamepad.right_trigger > 0 || this.timer.time() >= RobotConstants.CLAW_INVERT_TIMEOUT_MS) {
