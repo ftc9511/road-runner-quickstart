@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.teleop.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.RobotConstants;
 import org.firstinspires.ftc.teamcode.teleop.base.BaseRobot;
 import org.firstinspires.ftc.teamcode.teleop.controllers.ClawController;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
@@ -11,10 +13,12 @@ import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 public class CompetitionTeleOP extends BaseRobot {
     private Gamepad gamepad;
     private RobotController controller;
+    private ElapsedTime timer;
 
     @Override
     public void init() {
         this.gamepad = gamepad1;
+        this.timer = new ElapsedTime(ElapsedTime.MILLIS_IN_NANO);
         this.controller = new RobotController(hardwareMap, telemetry, this.gamepad);
         try {
             Thread.sleep(250);
@@ -33,7 +37,8 @@ public class CompetitionTeleOP extends BaseRobot {
         this.controller.motors.mecanumDrive(y, x, z);
 
         // Extremity movements
-        if (this.controller.gamepad.right_trigger > 0) {
+        if (this.controller.gamepad.right_trigger > 0 || this.timer.time() >= RobotConstants.CLAW_OPEN_TIMEOUT_MS) {
+            this.timer.reset();
             this.controller.claw.invert();
         }
 
@@ -47,10 +52,6 @@ public class CompetitionTeleOP extends BaseRobot {
         }
         if (!(this.controller.gamepad.dpad_down | this.controller.gamepad.dpad_up)) {
             this.controller.slide.manualControl(0);
-        }
-
-        if (this.controller.gamepad.a) {
-            this.controller.arm.invert();
         }
 
     }
