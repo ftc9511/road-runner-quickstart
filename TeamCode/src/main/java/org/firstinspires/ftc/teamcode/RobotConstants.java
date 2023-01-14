@@ -10,6 +10,7 @@ public final class RobotConstants {
     public static double CLAW_LEFT_OPEN = 0.5;
     public static double CLAW_RIGHT_CLOSED = 0.2;
     public static double CLAW_RIGHT_OPEN = 0.5;
+    public static int CLAW_INVERT_TIMEOUT_MS = 500;
 
     private RobotConstants() {}
 }
