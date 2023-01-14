@@ -37,7 +37,7 @@ public class CompetitionTeleOP extends BaseRobot {
         this.controller.motors.mecanumDrive(y, x, z);
 
         // Extremity movements
-        if (this.controller.gamepad.right_trigger > 0 || this.timer.time() >= RobotConstants.CLAW_OPEN_TIMEOUT_MS) {
+        if (this.controller.gamepad.right_trigger > 0 || this.timer.time() >= RobotConstants.CLAW_INVERT_TIMEOUT_MS) {
             this.timer.reset();
             this.controller.claw.invert();
         }
