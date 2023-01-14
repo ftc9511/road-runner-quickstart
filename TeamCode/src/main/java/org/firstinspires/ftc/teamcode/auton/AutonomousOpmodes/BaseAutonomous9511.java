@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.RobotConstants;
 import org.firstinspires.ftc.teamcode.auton.Vision.AprilTagDetectionPipeline;
@@ -237,6 +238,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     }
 
     protected void scoringPosition(boolean drop){
+        lift.setPower(1);
         shoulder.setPosition(RAISED);
         rightGrabber.setPosition(drop?RIGHT_OPEN:RIGHT_CLOSED);
         leftGrabber.setPosition(drop?LEFT_OPEN:LEFT_CLOSED);
