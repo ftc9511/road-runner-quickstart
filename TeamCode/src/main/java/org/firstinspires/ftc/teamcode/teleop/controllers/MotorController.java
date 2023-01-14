@@ -24,10 +24,16 @@ public class MotorController {
         double v2 = Range.clip(y + x - z, -1, 1);
         double v3 = Range.clip(y + x + z, -1, 1);
         double v4 = Range.clip(y - x - z, -1, 1);
-
-        this.front_left.setPower(v1 * 0.5);
-        this.front_right.setPower(v2 * 0.5);
-        this.back_left.setPower(v3 * 0.5);
-        this.back_right.setPower(v4 * 0.5);
+        if (slow) {
+            this.front_left.setPower(v1 * 0.5);
+            this.front_right.setPower(v2 * 0.5);
+            this.back_left.setPower(v3 * 0.5);
+            this.back_right.setPower(v4 * 0.5);
+        } else {
+            this.front_left.setPower(v1);
+            this.front_right.setPower(v2);
+            this.back_left.setPower(v3);
+            this.back_right.setPower(v4);
+        }
     }
 }
