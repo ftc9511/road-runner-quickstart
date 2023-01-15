@@ -15,13 +15,13 @@ public class ConeAuton extends BaseAutonomous9511 {
                 .strafeRight(12)
                 .build());
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .forward(6)
+                .forward(5)
                 .build());
 
         scoringPosition(true);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .back(6)
+                .back(5)
                 .build());
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .strafeLeft(12)
