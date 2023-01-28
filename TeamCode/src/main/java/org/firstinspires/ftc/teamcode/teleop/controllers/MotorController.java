@@ -16,24 +16,25 @@ public class MotorController {
         this.front_left = map.get(DcMotor.class, "fr");
         this.back_left = map.get(DcMotor.class, "bl");
         this.back_right = map.get(DcMotor.class, "br");
+        this.front_right.setDirection(DcMotor.Direction.REVERSE);
+        this.back_right.setDirection(DcMotor.Direction.REVERSE);
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
     }
 
     public void mecanumDrive(double y, double x, double z, boolean slow) {
-        double v1 = Range.clip(y - x + z, -1, 1);
-        double v2 = Range.clip(y + x - z, -1, 1);
-        double v3 = Range.clip(y + x + z, -1, 1);
-        double v4 = Range.clip(y - x - z, -1, 1);
+        double coefficient = 1;
         if (slow) {
-            this.front_left.setPower(v1 * 0.5);
-            this.front_right.setPower(v2 * 0.5);
-            this.back_left.setPower(v3 * 0.5);
-            this.back_right.setPower(v4 * 0.5);
-        } else {
-            this.front_left.setPower(v1);
-            this.front_right.setPower(v2);
-            this.back_left.setPower(v3);
-            this.back_right.setPower(v4);
+            coefficient = 0.5;
         }
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(z), 1);
+        double frontLeftPower = (y + x + z) / denominator;
+        double backLeftPower = (y - x + z) / denominator;
+        double frontRightPower = (y - x - z) / denominator;
+        double backRightPower = (y + x - z) / denominator;
+
+        front_left.setPower(frontLeftPower);
+        back_left.setPower(backLeftPower);
+        front_right.setPower(frontRightPower);
+        back_right.setPower(backRightPower);
     }
 }
