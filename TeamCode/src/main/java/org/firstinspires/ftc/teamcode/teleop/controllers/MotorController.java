@@ -25,7 +25,7 @@ public class MotorController {
     public void mecanumDrive(double y, double x, double z, double slow) {
         double r = Math.hypot(x, y);
         double angle = Math.atan2(y, x) - Math.PI / 4;
-        final double[] powers = {r * Math.cos(angle) + z, r * Math.sin(angle) - z, r * Math.sin(angle) + z, r * Math.cos(angle) - z};
+        double[] powers = {r * Math.cos(angle) + z, r * Math.sin(angle) - z, r * Math.sin(angle) + z, r * Math.cos(angle) - z};
         for (int i = 0; i < 4; i++) {
             this.motors[i].setPower(powers[i] * slow);
         }
