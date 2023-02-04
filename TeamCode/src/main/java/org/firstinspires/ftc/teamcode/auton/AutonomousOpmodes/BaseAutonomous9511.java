@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auton.AutonomousOpmodes;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -46,14 +47,12 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     protected Servo leftGrabber;
     protected Servo rightGrabber;
 
-    protected double RAISED = RobotConstants.ARM_RAISED;
-    protected double LOWERED = RobotConstants.ARM_LOWERED;
-    protected int EXTEND_TICKS = RobotConstants.LINEAR_SLIDE_EXTEND_TICKS;
     protected double LEFT_OPEN = RobotConstants.CLAW_LEFT_OPEN;
     protected double LEFT_CLOSED = RobotConstants.CLAW_LEFT_CLOSED;
     protected double RIGHT_OPEN = RobotConstants.CLAW_RIGHT_OPEN;
     protected double RIGHT_CLOSED = RobotConstants.CLAW_RIGHT_CLOSED;
     protected int ZERO_POSITION;
+    public RobotController controller;
 
     protected void initRobot(){
         initState("Starting");
@@ -62,17 +61,9 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         drive = new SampleMecanumDrive(hardwareMap);
 
         initState("Servos");
-        shoulder = hardwareMap.get(Servo.class, "shoulder");
-        leftGrabber = hardwareMap.get(Servo.class, "left");
-        rightGrabber = hardwareMap.get(Servo.class, "right");
-
+        this.controller = new RobotController(hardwareMap, telemetry);
         initState("Motors");
-        lift = hardwareMap.get(DcMotorEx.class, "lift");
-        lift.setTargetPosition(lift.getCurrentPosition());
-        lift.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        lift.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        ZERO_POSITION = lift.getCurrentPosition();
-        grabbingPosition(true);
+        grabbingPosition();
 
         initState("Vision");
         initVision();
@@ -187,7 +178,7 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     void tagToTelemetry(AprilTagDetection detection)
     {
         telemetry.addLine(String.format("\nDetected tag ID=%d", detection.id));
-        telemetry.addLine(String.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
+        telemetry.addLine(Strjing.format("Translation X: %.2f feet", detection.pose.x*FEET_PER_METER));
         telemetry.addLine(String.format("Translation Y: %.2f feet", detection.pose.y*FEET_PER_METER));
         telemetry.addLine(String.format("Translation Z: %.2f feet", detection.pose.z*FEET_PER_METER));
         telemetry.addLine(String.format("Rotation Yaw: %.2f degrees", Math.toDegrees(detection.pose.yaw)));
@@ -230,20 +221,13 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         }
     }
 
-    protected void grabbingPosition(boolean start){
-//        shoulder.setPosition(LOWERED);
-        lift.setTargetPosition(ZERO_POSITION);
-        lift.setPower(1);
-//        sleep(2000);
-        rightGrabber.setPosition(start?RIGHT_CLOSED:RIGHT_OPEN);
-        leftGrabber.setPosition(start?LEFT_CLOSED:LEFT_OPEN);
+    protected void grabbingPosition(){
+        this.controller.slide.retract();
+        this.controller.claw.invert();
     }
 
-    protected void scoringPosition(boolean drop){
-        lift.setTargetPosition(ZERO_POSITION+EXTEND_TICKS);
-        lift.setPower(1);
-//        shoulder.setPosition(RAISED);
-        rightGrabber.setPosition(drop?RIGHT_OPEN:RIGHT_CLOSED);
-        leftGrabber.setPosition(drop?LEFT_OPEN:LEFT_CLOSED);
+    protected void scoringPosition(){
+        this.controller.slide.extend();
+        this.controller.claw.invert();
     }
 }
