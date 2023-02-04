@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.teleop.controllers;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.Range;
 
 public class MotorController {
     public DcMotor front_right;
@@ -16,25 +16,18 @@ public class MotorController {
         this.front_left = map.get(DcMotor.class, "fr");
         this.back_left = map.get(DcMotor.class, "bl");
         this.back_right = map.get(DcMotor.class, "br");
-        this.front_right.setDirection(DcMotor.Direction.REVERSE);
-        this.back_right.setDirection(DcMotor.Direction.REVERSE);
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
+        for (DcMotor motor: this.motors) {
+            motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        }
     }
 
-    public void mecanumDrive(double y, double x, double z, boolean slow) {
-        double coefficient = 1;
-        if (slow) {
-            coefficient = 0.5;
+    public void mecanumDrive(double y, double x, double z, double slow) {
+        double r = Math.hypot(x, y);
+        double angle = Math.atan2(y, x) - Math.PI / 4;
+        final double[] powers = {r * Math.cos(angle) + z, r * Math.sin(angle) - z, r * Math.sin(angle) + z, r * Math.cos(angle) - z};
+        for (int i = 0; i < 4; i++) {
+            this.motors[i].setPower(powers[i] * slow);
         }
-        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(z), 1);
-        double frontLeftPower = (y + x + z) / denominator;
-        double backLeftPower = (y - x + z) / denominator;
-        double frontRightPower = (y - x - z) / denominator;
-        double backRightPower = (y + x - z) / denominator;
-
-        front_left.setPower(frontLeftPower);
-        back_left.setPower(backLeftPower);
-        front_right.setPower(frontRightPower);
-        back_right.setPower(backRightPower);
     }
 }
