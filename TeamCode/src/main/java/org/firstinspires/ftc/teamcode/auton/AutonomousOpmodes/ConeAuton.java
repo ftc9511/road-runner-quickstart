@@ -10,7 +10,7 @@ public class ConeAuton extends BaseAutonomous9511 {
         waitForStartVisionPipeline();
         telemetryVision();
         detectSleeve();
-        scoringPosition(false);
+        scoringPosition();
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .strafeRight(12)
                 .build());
@@ -18,7 +18,7 @@ public class ConeAuton extends BaseAutonomous9511 {
                 .forward(5)
                 .build());
 
-        scoringPosition(true);
+        scoringPosition();
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .back(5)
@@ -27,9 +27,9 @@ public class ConeAuton extends BaseAutonomous9511 {
                 .strafeLeft(12)
                 .build());
 
-        leftGrabber.setPosition(LEFT_CLOSED);
-        rightGrabber.setPosition(RIGHT_CLOSED);
-        lift.setTargetPosition(ZERO_POSITION);
+        this.controller.claw.invert();
+        this.controller.slide.retract();
+        
 
         if (PARKINGTARGET == 1) {
             drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())

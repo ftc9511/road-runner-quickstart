@@ -13,7 +13,7 @@ public class BaseTeleOP extends BaseRobot {
 
     @Override
     public void init() {
-        this.machine = new StateMachine(new RobotIdleState(), new RobotController(this.hardwareMap, this.telemetry, this.gamepad1));
+        // this.machine = new StateMachine(new RobotIdleState(), new RobotController(this.hardwareMap, this.telemetry, this.gamepad1));
     }
 
     @Override
