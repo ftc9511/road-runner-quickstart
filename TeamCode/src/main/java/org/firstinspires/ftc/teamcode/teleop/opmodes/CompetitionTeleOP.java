@@ -18,9 +18,6 @@ public class CompetitionTeleOP extends BaseRobot {
     public void init() {
         this.gamepad = gamepad1;
         this.controller = new RobotController(hardwareMap, telemetry, this.gamepad);
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {}
         this.controller.claw.state = ClawController.ClawState.GRAB;
         this.controller.claw.invert();
     }
