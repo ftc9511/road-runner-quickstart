@@ -13,12 +13,10 @@ import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 public class CompetitionTeleOP extends BaseRobot {
     private Gamepad gamepad;
     private RobotController controller;
-    private ElapsedTime timer;
 
     @Override
     public void init() {
         this.gamepad = gamepad1;
-        this.timer = new ElapsedTime(ElapsedTime.MILLIS_IN_NANO);
         this.controller = new RobotController(hardwareMap, telemetry, this.gamepad);
         try {
             Thread.sleep(250);
@@ -30,19 +28,20 @@ public class CompetitionTeleOP extends BaseRobot {
     @Override
     public void loop() {
         // Calculate drivetrain values and apply them
-        double x = this.controller.gamepad.left_stick_y;
-        double y = this.controller.gamepad.left_stick_x;
-        double z = this.controller.gamepad.right_stick_x;
-        boolean slow = this.controller.gamepad.left_bumper | this.controller.gamepad.right_bumper;
-
-        this.controller.motors.mecanumDrive(y, x, z, slow);
-
-        // Extremity movements
-        if (this.controller.gamepad.right_trigger > 0 || this.timer.time() >= RobotConstants.CLAW_INVERT_TIMEOUT_MS) {
-            this.timer.reset();
-            this.controller.claw.invert();
+        double x = gamepad1.left_stick_x;
+        double y = -gamepad1.left_stick_y;
+        double z = gamepad1.right_stick_x;
+        double slow = 1;
+        if(this.controller.gamepad.b) {
+            slow = 0.5;
         }
-
+        this.controller.motors.mecanumDrive(y, x, z, slow);
+        // Extremity movements
+        if (this.controller.gamepad.right_bumper) {
+            this.controller.claw.expand();
+        } else if (this.controller.gamepad.left_bumper) {
+            this.controller.claw.grab();
+        }
         if (this.controller.gamepad.dpad_up) {
             // this.controller.slide.extend();
             this.controller.slide.manualControl(1);
@@ -55,5 +54,6 @@ public class CompetitionTeleOP extends BaseRobot {
             this.controller.slide.manualControl(0);
         }
 
+        this.telemetry.update();
     }
 }
