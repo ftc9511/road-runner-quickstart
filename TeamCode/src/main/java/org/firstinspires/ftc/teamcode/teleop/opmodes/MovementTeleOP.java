@@ -11,6 +11,6 @@ import org.firstinspires.ftc.teamcode.teleop.states.lib.StateMachine;
 public class MovementTeleOP extends BaseTeleOP {
     @Override
     public void init() {
-        this.machine = new StateMachine(new RobotMovingState(), new RobotController(this.hardwareMap, this.telemetry, this.gamepad1));
+//        this.machine = new StateMachine(new RobotMovingState(), new RobotController(this.hardwareMap, this.telemetry, this.gamepad1));
     }
 }
