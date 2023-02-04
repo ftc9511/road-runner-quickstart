@@ -18,14 +18,14 @@ public class ClawTestOpMode extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.dpad_up) {
-            this.left.setPosition(this.left.getPosition()+0.1);
+            this.left.setPosition(this.left.getPosition()+0.01);
         } else if (gamepad1.dpad_down) {
-            this.left.setPosition(this.left.getPosition()-0.1);
+            this.left.setPosition(this.left.getPosition()-0.01);
         }
         if (gamepad1.dpad_left) {
-            this.right.setPosition(this.right.getPosition()+0.1);
+            this.right.setPosition(this.right.getPosition()+0.01);
         } else if (gamepad1.dpad_right) {
-            this.right.setPosition(this.right.getPosition()-0.1);
+            this.right.setPosition(this.right.getPosition()-0.01);
         }
         telemetry.addData("left servo position: ", this.left.getPosition());
         telemetry.addData("right servo position: ", this.right.getPosition());
