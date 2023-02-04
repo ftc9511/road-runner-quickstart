@@ -6,11 +6,10 @@ public final class RobotConstants {
     public static double ARM_RAISED = 0.2688;
     public static double ARM_LOWERED = 0.0988;
     public static int LINEAR_SLIDE_EXTEND_TICKS = -1950;
-    public static double CLAW_LEFT_CLOSED = 0;
-    public static double CLAW_LEFT_OPEN = 0.5;
-    public static double CLAW_RIGHT_CLOSED = 1;
-    public static double CLAW_RIGHT_OPEN = 0.5;
-    public static int CLAW_INVERT_TIMEOUT_MS = 500;
+    public static double CLAW_LEFT_CLOSED = 0.63;
+    public static double CLAW_LEFT_OPEN = 0.47;
+    public static double CLAW_RIGHT_CLOSED = 0.18;
+    public static double CLAW_RIGHT_OPEN = 0.34;
 
     private RobotConstants() {}
 }
