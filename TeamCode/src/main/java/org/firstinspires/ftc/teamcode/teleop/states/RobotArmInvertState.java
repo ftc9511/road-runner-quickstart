@@ -8,7 +8,7 @@ public class RobotArmInvertState extends RobotState {
 
     @Override
     public void enter(RobotController controller) {
-        controller.arm.invert();
+        // controller.arm.invert();
     }
     @Override
     public RobotState loop() throws NoNewStateException {
