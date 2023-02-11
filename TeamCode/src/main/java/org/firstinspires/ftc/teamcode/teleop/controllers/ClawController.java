@@ -34,8 +34,8 @@ public class ClawController {
     }
 
     public void expand() {
-        this.left.setPosition(RobotConstants.CLAW_LEFT_CLOSED);
-        this.right.setPosition(RobotConstants.CLAW_RIGHT_CLOSED);
+        this.left.setPosition(RobotConstants.CLAW_LEFT_OPEN);
+        this.right.setPosition(RobotConstants.CLAW_RIGHT_OPEN);
         this.state = ClawState.OPEN;
     }
 
