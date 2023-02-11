@@ -7,21 +7,28 @@ import org.firstinspires.ftc.teamcode.RobotConstants;
 
 
 public class LinearSlideController {
+
     private DcMotor motor;
-    private int RETRACT_TICKS;
+    public int RETRACT_TICKS;
 
     public LinearSlideController(HardwareMap map) {
         this.motor = map.get(DcMotor.class, "lift");
-        this.RETRACT_TICKS = this.motor.getCurrentPosition();
         this.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.RETRACT_TICKS = this.motor.getCurrentPosition();
         this.motor.setTargetPosition(this.RETRACT_TICKS);
         this.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.motor.setPower(0.2);
     }
-    public void extend() {
+    public void fullExtend() {
         this.motor.setTargetPosition(RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
     }
-    public void retract() {
+    public void fullRetract() {
         this.motor.setTargetPosition(this.RETRACT_TICKS);
+    }
+
+
+    public void toPosition(int pos) {
+        this.motor.setTargetPosition(pos);
     }
 }
