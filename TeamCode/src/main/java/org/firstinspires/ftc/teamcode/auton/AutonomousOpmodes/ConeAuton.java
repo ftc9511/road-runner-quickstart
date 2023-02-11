@@ -28,7 +28,7 @@ public class ConeAuton extends BaseAutonomous9511 {
                 .build());
 
         this.controller.claw.invert();
-        this.controller.slide.retract();
+        this.controller.slide.fullRetract();
         
 
         if (PARKINGTARGET == 1) {
