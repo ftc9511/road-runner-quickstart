@@ -1,29 +1,19 @@
 package org.firstinspires.ftc.teamcode.teleop.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.teamcode.RobotConstants;
 import org.firstinspires.ftc.teamcode.teleop.base.BaseRobot;
 import org.firstinspires.ftc.teamcode.teleop.controllers.ClawController;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 
-@TeleOp(name="[No-FSM] 9511 Movement TeleOP")
+@TeleOp(name="9511 Movement TeleOP")
 public class CompetitionTeleOP extends BaseRobot {
-    private Gamepad gamepad;
     private RobotController controller;
-    private Servo left;
-    private Servo right;
 
     @Override
     public void init() {
         this.controller = new RobotController(hardwareMap, telemetry);
         this.controller.claw.state = ClawController.ClawState.GRAB;
         this.controller.claw.invert();
-        this.left = hardwareMap.get(Servo.class, "left");
-        this.right = hardwareMap.get(Servo.class, "right");
     }
 
     @Override
@@ -40,7 +30,7 @@ public class CompetitionTeleOP extends BaseRobot {
         if (gamepad1.right_trigger > 0 && gamepad1.left_trigger > 0) {
             slow = 0.25;
         }
-        this.controller.motors.mecanumDrive(y, x, z, slow);
+        this.controller.motors.mecanumDrive(y, x, z, slow, telemetry);
         // Extremity movements
         if (gamepad1.right_bumper) {
             this.controller.claw.expand();
