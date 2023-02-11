@@ -17,9 +17,6 @@ public class MotorController {
         this.back_left = map.get(DcMotor.class, "bl");
         this.back_right = map.get(DcMotor.class, "br");
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
-//        for (DcMotor motor: this.motors) {
-//            motor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        }
         front_right.setDirection(DcMotorSimple.Direction.FORWARD);
         front_left.setDirection(DcMotorSimple.Direction.REVERSE);
         back_left.setDirection(DcMotorSimple.Direction.FORWARD);
