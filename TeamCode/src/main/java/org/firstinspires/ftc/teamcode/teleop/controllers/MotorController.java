@@ -18,20 +18,18 @@ public class MotorController {
         this.back_left = map.get(DcMotor.class, "bl");
         this.back_right = map.get(DcMotor.class, "br");
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
-        front_right.setDirection(DcMotorSimple.Direction.FORWARD);
-        front_left.setDirection(DcMotorSimple.Direction.REVERSE);
+        front_right.setDirection(DcMotorSimple.Direction.REVERSE);
+        front_left.setDirection(DcMotorSimple.Direction.FORWARD);
         back_left.setDirection(DcMotorSimple.Direction.FORWARD);
         back_right.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void mecanumDrive(double y, double x, double z, double slow, Telemetry telemetry) {
-        double r = Math.hypot(x, y);
-        double angle = Math.atan2(y, x) - Math.PI / 4;
-        double[] powers = {r * Math.cos(angle) + z, r * Math.sin(angle) - z, r * Math.sin(angle) + z, r * Math.cos(angle) - z};
-        telemetry.addData("Motor powers: ", powers);
-        for (int i = 0; i < 4; i++) {
-            powers[i] *= -1;
-            this.motors[i].setPower(powers[i] * slow);
-        }
+        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(z), 1);
+
+        this.front_left.setPower(((y + x + z) / denominator) * slow);
+        this.back_left.setPower(((y - x + z) / denominator) * slow);
+        this.front_right.setPower(((y - x - z) / denominator) * slow);
+        this.back_right.setPower(((y + x - z) / denominator) * slow);
     }
 }
