@@ -11,7 +11,7 @@ public class LinearSlideTestOpMode extends OpMode {
 
     @Override
     public void init() {
-        this.linear_slide = hardwareMap.get(DcMotor.class, "linear_slide");
+        this.linear_slide = hardwareMap.get(DcMotor.class, "lift");
         this.linear_slide.setDirection(DcMotorSimple.Direction.REVERSE);
         this.linear_slide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.linear_slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
