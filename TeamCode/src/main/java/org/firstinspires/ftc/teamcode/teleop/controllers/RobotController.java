@@ -13,11 +13,13 @@ public class RobotController {
     // public ArmController arm;
     public Gamepad gamepad;
     public Telemetry telemetry;
+    public JunctionLevelController junctions;
 
     public RobotController(HardwareMap map, Telemetry telemetry) {
         this.motors = new MotorController(map);
         this.slide = new LinearSlideController(map);
         this.telemetry = telemetry;
         this.claw = new ClawController(map);
+        this.junctions = new JunctionLevelController(this.slide);
     }
 }
