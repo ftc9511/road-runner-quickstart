@@ -12,23 +12,20 @@ public class CompetitionTeleOP extends BaseRobot {
     @Override
     public void init() {
         this.controller = new RobotController(hardwareMap, telemetry);
-        this.controller.claw.state = ClawController.ClawState.GRAB;
-        this.controller.claw.invert();
     }
 
     @Override
     public void loop() {
         // Calculate drivetrain values and apply them
-        double x = gamepad1.left_stick_x;
-        // TODO: check if negative sign fixes motor inversion
+        double x = -gamepad1.right_stick_x;
         double y = -gamepad1.left_stick_y;
-        double z = gamepad1.right_stick_x;
+        double z = -gamepad1.left_stick_x;
         double slow = 1;
         if (gamepad1.left_trigger > 0) {
-            slow = 0.5;
+            slow = 0.55;
         }
         if (gamepad1.right_trigger > 0 && gamepad1.left_trigger > 0) {
-            slow = 0.25;
+            slow = 0.30;
         }
         this.controller.motors.mecanumDrive(y, x, z, slow, telemetry);
         // Extremity movements
@@ -39,15 +36,10 @@ public class CompetitionTeleOP extends BaseRobot {
             this.controller.claw.grab();
         }
         if (gamepad1.dpad_up) {
-            // this.controller.slide.extend();
-            this.controller.slide.manualControl(1);
+            this.controller.slide.extend();
         }
         if (gamepad1.dpad_down) {
-            //this.controller.slide.retract();
-            this.controller.slide.manualControl(-1);
-        }
-        if (!(gamepad1.dpad_down | gamepad1.dpad_up)) {
-            this.controller.slide.manualControl(0);
+            this.controller.slide.retract();
         }
 
         this.telemetry.update();
