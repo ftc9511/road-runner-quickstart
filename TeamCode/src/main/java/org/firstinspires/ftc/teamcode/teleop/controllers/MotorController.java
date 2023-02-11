@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop.controllers;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class MotorController {
     public DcMotor front_right;
@@ -23,10 +24,11 @@ public class MotorController {
         back_right.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void mecanumDrive(double y, double x, double z, double slow) {
+    public void mecanumDrive(double y, double x, double z, double slow, Telemetry telemetry) {
         double r = Math.hypot(x, y);
         double angle = Math.atan2(y, x) - Math.PI / 4;
         double[] powers = {r * Math.cos(angle) + z, r * Math.sin(angle) - z, r * Math.sin(angle) + z, r * Math.cos(angle) - z};
+        telemetry.addData("Motor powers: ", powers);
         for (int i = 0; i < 4; i++) {
             powers[i] *= -1;
             this.motors[i].setPower(powers[i] * slow);
