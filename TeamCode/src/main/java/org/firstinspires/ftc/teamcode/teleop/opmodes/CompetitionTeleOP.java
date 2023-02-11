@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.teleop.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.teleop.base.BaseRobot;
-import org.firstinspires.ftc.teamcode.teleop.controllers.ClawController;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 
 @TeleOp(name="9511 Movement TeleOP")
@@ -36,10 +35,10 @@ public class CompetitionTeleOP extends BaseRobot {
             this.controller.claw.grab();
         }
         if (gamepad1.dpad_up) {
-            this.controller.slide.extend();
+            this.controller.junctions.next();
         }
         if (gamepad1.dpad_down) {
-            this.controller.slide.retract();
+            this.controller.junctions.back();
         }
 
         this.telemetry.update();
