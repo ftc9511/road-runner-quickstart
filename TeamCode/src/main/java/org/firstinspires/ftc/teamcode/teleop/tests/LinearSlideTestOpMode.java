@@ -20,9 +20,9 @@ public class LinearSlideTestOpMode extends OpMode {
     @Override
     public void loop() {
         if (gamepad1.dpad_up) {
-            this.linear_slide.setPower(0.25);
+            this.linear_slide.setPower(0.15);
         } else if (gamepad1.dpad_down) {
-            this.linear_slide.setPower(-0.25);
+            this.linear_slide.setPower(-0.15);
         } else {
             this.linear_slide.setPower(0);
         }
