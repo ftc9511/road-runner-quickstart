@@ -13,18 +13,14 @@ public class JunctionLevelController {
     }
 
     public void next() {
-        if (this.current == junctionTicks.get(junctionTicks.size() - 1)) {
-            return; // We have nowhere else to go
-        } else {
+        if (!(this.current == junctionTicks.get(junctionTicks.size() - 1))) {
             this.current = junctionTicks.get(junctionTicks.indexOf(this.current) + 1);
             this.controller.toPosition(this.current);
         }
     }
 
     public void back() {
-        if (this.current == junctionTicks.get(0)) {
-            return; // We have nowhere else to go
-        } else {
+        if (!(this.current == junctionTicks.get(0))) {
             this.current = junctionTicks.get(junctionTicks.indexOf(this.current) - 1);
             this.controller.toPosition(this.current);
         }
