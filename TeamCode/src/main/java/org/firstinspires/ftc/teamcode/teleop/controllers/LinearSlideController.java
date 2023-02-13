@@ -18,7 +18,7 @@ public class LinearSlideController {
         this.RETRACT_TICKS = this.motor.getCurrentPosition();
         this.motor.setTargetPosition(this.RETRACT_TICKS);
         this.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.motor.setPower(0.2);
+        this.motor.setPower(0.15);
     }
     public void fullExtend() {
         this.motor.setTargetPosition(RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
