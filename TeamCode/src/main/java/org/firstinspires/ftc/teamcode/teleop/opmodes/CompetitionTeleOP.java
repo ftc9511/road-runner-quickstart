@@ -20,7 +20,7 @@ public class CompetitionTeleOP extends BaseRobot {
         double y = -gamepad1.left_stick_y;
         double z = -gamepad1.left_stick_x;
         double slow = 1;
-        if (gamepad1.left_trigger > 0) {
+        if (gamepad1.left_trigger > 0 || gamepad1.right_trigger > 0) {
             slow = 0.55;
         }
         if (gamepad1.right_trigger > 0 && gamepad1.left_trigger > 0) {
@@ -35,10 +35,10 @@ public class CompetitionTeleOP extends BaseRobot {
             this.controller.claw.grab();
         }
         if (gamepad1.dpad_up) {
-            this.controller.junctions.next();
+            this.controller.slide.toRelativePosition(25);
         }
         if (gamepad1.dpad_down) {
-            this.controller.junctions.back();
+            this.controller.slide.toRelativePosition(-25);
         }
 
         this.telemetry.update();
