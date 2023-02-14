@@ -20,7 +20,7 @@ public class MotorController {
         this.motors = new DcMotor[] {front_right, front_left, back_left, back_right};
         front_right.setDirection(DcMotorSimple.Direction.REVERSE);
         front_left.setDirection(DcMotorSimple.Direction.FORWARD);
-        back_left.setDirection(DcMotorSimple.Direction.FORWARD);
+        back_left.setDirection(DcMotorSimple.Direction.REVERSE);
         back_right.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
