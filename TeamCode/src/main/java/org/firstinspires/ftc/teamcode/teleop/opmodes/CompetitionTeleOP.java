@@ -30,17 +30,17 @@ public class CompetitionTeleOP extends BaseRobot {
         }
         this.controller.motors.mecanumDrive(y, x, z, slow, telemetry);
         // Extremity movements
-        if (gamepad1.right_bumper) {
+        if (gamepad2.right_bumper) {
             this.controller.claw.expand();
         }
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             this.controller.claw.grab();
         }
         if (this.timer.milliseconds() > 500) {
-            if (gamepad1.dpad_up) {
+            if (gamepad2.dpad_up) {
                 this.controller.slide.toPosition(25);
             }
-            if (gamepad1.dpad_down) {
+            if (gamepad2.dpad_down) {
                 this.controller.slide.toPosition(-25);
             }
 
