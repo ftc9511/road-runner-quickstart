@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.teleop.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.teleop.base.BaseRobot;
 import org.firstinspires.ftc.teamcode.teleop.controllers.RobotController;
 
 @TeleOp(name="9511 Movement TeleOP")
 public class CompetitionTeleOP extends BaseRobot {
     private RobotController controller;
+    private final ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
 
     @Override
     public void init() {
@@ -34,11 +36,15 @@ public class CompetitionTeleOP extends BaseRobot {
         if (gamepad1.left_bumper) {
             this.controller.claw.grab();
         }
-        if (gamepad1.dpad_up) {
-            this.controller.slide.toRelativePosition(25);
-        }
-        if (gamepad1.dpad_down) {
-            this.controller.slide.toRelativePosition(-25);
+        if (this.timer.milliseconds() > 500) {
+            if (gamepad1.dpad_up) {
+                this.controller.slide.toPosition(25);
+            }
+            if (gamepad1.dpad_down) {
+                this.controller.slide.toPosition(-25);
+            }
+
+            this.timer.reset();
         }
 
         this.telemetry.update();
