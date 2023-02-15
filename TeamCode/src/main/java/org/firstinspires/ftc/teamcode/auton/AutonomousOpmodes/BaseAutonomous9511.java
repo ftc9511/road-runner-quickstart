@@ -47,6 +47,11 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     protected Servo leftGrabber;
     protected Servo rightGrabber;
 
+    protected DcMotorEx leftFront;
+    protected DcMotorEx leftRear;
+    protected DcMotorEx rightFront;
+    protected DcMotorEx rightRear;
+
     protected double LEFT_OPEN = RobotConstants.CLAW_LEFT_OPEN;
     protected double LEFT_CLOSED = RobotConstants.CLAW_LEFT_CLOSED;
     protected double RIGHT_OPEN = RobotConstants.CLAW_RIGHT_OPEN;
@@ -58,7 +63,11 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
         initState("Starting");
 
         initState("Drivetrain");
-        drive = new SampleMecanumDrive(hardwareMap);
+//        drive = new SampleMecanumDrive(hardwareMap);
+        leftFront = hardwareMap.get(DcMotorEx.class, "fl");
+        leftRear = hardwareMap.get(DcMotorEx.class, "bl");
+        rightRear = hardwareMap.get(DcMotorEx.class, "br");
+        rightFront = hardwareMap.get(DcMotorEx.class, "fr");
 
         initState("Servos");
         this.controller = new RobotController(hardwareMap, telemetry);
@@ -229,5 +238,53 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
     protected void scoringPosition(){
         this.controller.slide.fullExtend();
         this.controller.claw.invert();
+    }
+
+    protected void forward (double power, long time){
+        leftFront.setPower(power);
+        leftRear.setPower(power);
+        rightFront.setPower(power);
+        rightRear.setPower(power);
+        sleep(time*1000);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+    }
+
+    protected void back (double power, long time){
+        leftFront.setPower(-power);
+        leftRear.setPower(-power);
+        rightFront.setPower(-power);
+        rightRear.setPower(-power);
+        sleep(time*1000);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+    }
+
+    protected void left (double power, long time){
+        leftFront.setPower(-power);
+        leftRear.setPower(power);
+        rightFront.setPower(power);
+        rightRear.setPower(-power);
+        sleep(time*1000);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+    }
+
+    protected void right (double power, long time){
+        leftFront.setPower(power);
+        leftRear.setPower(-power);
+        rightFront.setPower(-power);
+        rightRear.setPower(power);
+        sleep(time*1000);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
     }
 }
