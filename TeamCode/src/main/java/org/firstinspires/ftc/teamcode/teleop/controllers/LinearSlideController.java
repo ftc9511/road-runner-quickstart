@@ -23,10 +23,13 @@ public class LinearSlideController {
         this.motor.setTargetPosition(this.RETRACT_TICKS);
         this.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.targetTicks = this.RETRACT_TICKS;
+        // this.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void fullExtend() {
-        this.motor.setTargetPosition(RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
+        this.motor.setTargetPosition(this.RETRACT_TICKS+RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
     }
+
     public void fullRetract() {
         this.motor.setTargetPosition(this.RETRACT_TICKS);
     }
@@ -35,10 +38,14 @@ public class LinearSlideController {
         this.motor.setPower(direction * 0.8);
     }
 
-    public void toPosition(int amount) {
+    public void toRelativePosition(int amount) {
         this.targetTicks += amount;
         int liftPosition = Range.clip(this.targetTicks, this.RETRACT_TICKS, this.RETRACT_TICKS + RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
         this.motor.setTargetPosition(liftPosition);
-        this.motor.setPower(max(0.2, abs(liftPosition - this.motor.getCurrentPosition()) / 500.0));
+        this.motor.setPower(0.75);
+    }
+
+    public void resetRelativePosition() {
+        this.targetTicks = this.motor.getCurrentPosition();
     }
 }

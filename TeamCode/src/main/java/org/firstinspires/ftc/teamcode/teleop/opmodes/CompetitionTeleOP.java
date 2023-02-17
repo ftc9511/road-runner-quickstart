@@ -36,17 +36,28 @@ public class CompetitionTeleOP extends BaseRobot {
         if (gamepad2.left_bumper) {
             this.controller.claw.grab();
         }
-        if (this.timer.milliseconds() > 500) {
+        if (this.timer.milliseconds() > 100) {
             if (gamepad2.dpad_up) {
-                this.controller.slide.toPosition(25);
+                this.controller.slide.toRelativePosition(200);
             }
             if (gamepad2.dpad_down) {
-                this.controller.slide.toPosition(-25);
+                this.controller.slide.toRelativePosition(-200);
             }
 
+            if (!gamepad2.dpad_down && !gamepad2.dpad_up) {
+                this.controller.slide.resetRelativePosition();
+            }
             this.timer.reset();
         }
 
+        if (gamepad2.a) {
+            this.controller.slide.fullRetract();
+        }
+        if (gamepad1.b){
+            this.controller.slide.fullExtend();
+        }
+        telemetry.addData("linear slide target position:", this.controller.slide.targetTicks);
+        telemetry.addData("timer value:", timer.milliseconds());
         this.telemetry.update();
     }
 }
