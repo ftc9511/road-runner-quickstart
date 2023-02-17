@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.teleop.controllers;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -23,11 +21,9 @@ public class LinearSlideController {
         this.motor.setTargetPosition(this.RETRACT_TICKS);
         this.motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.targetTicks = this.RETRACT_TICKS;
-        // this.motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        // this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void fullExtend() {
-        this.motor.setTargetPosition(this.RETRACT_TICKS+RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
+        this.motor.setTargetPosition(this.RETRACT_TICKS + RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
     }
 
     public void fullRetract() {
@@ -35,17 +31,19 @@ public class LinearSlideController {
     }
 
     public void manualControl(double direction) {
-        this.motor.setPower(direction * 0.8);
+        this.motor.setPower(direction * RobotConstants.LINEAR_SLIDE_VELOCITY_MULTIPLIER);
     }
 
     public void toRelativePosition(int amount) {
         this.targetTicks += amount;
+        // Make sure that the value we want is within the achievable range for our motor to prevent hardware damage
         int liftPosition = Range.clip(this.targetTicks, this.RETRACT_TICKS, this.RETRACT_TICKS + RobotConstants.LINEAR_SLIDE_EXTEND_TICKS);
         this.motor.setTargetPosition(liftPosition);
-        this.motor.setPower(0.75);
+        this.motor.setPower(RobotConstants.LINEAR_SLIDE_VELOCITY_MULTIPLIER);
     }
 
     public void resetRelativePosition() {
+        // Simple method to stop the motor from moving.
         this.targetTicks = this.motor.getCurrentPosition();
     }
 }
