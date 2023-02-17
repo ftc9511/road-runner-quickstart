@@ -24,7 +24,7 @@ public class MotorController {
         back_right.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void mecanumDrive(double y, double x, double z, double slow, Telemetry telemetry) {
+    public void mecanumDrive(double y, double x, double z, double slow) {
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(z), 1);
 
         this.front_left.setPower(((y + x + z) / denominator) * slow);

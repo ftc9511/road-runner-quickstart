@@ -28,7 +28,7 @@ public class CompetitionTeleOP extends BaseRobot {
         if (gamepad1.right_trigger > 0 && gamepad1.left_trigger > 0) {
             slow = 0.30;
         }
-        this.controller.motors.mecanumDrive(y, x, z, slow, telemetry);
+        this.controller.motors.mecanumDrive(y, x, z, slow);
         // Extremity movements
         if (gamepad2.right_bumper) {
             this.controller.claw.expand();
@@ -36,7 +36,7 @@ public class CompetitionTeleOP extends BaseRobot {
         if (gamepad2.left_bumper) {
             this.controller.claw.grab();
         }
-        if (this.timer.milliseconds() > 100) {
+        if (this.timer.milliseconds() > 100) { // Check if our timer is up
             if (gamepad2.dpad_up) {
                 this.controller.slide.toRelativePosition(200);
             }
@@ -45,19 +45,18 @@ public class CompetitionTeleOP extends BaseRobot {
             }
 
             if (!gamepad2.dpad_down && !gamepad2.dpad_up) {
+                // Neither switch is being pressed, therefore we should stop all movement.
                 this.controller.slide.resetRelativePosition();
             }
+            // Reset the timer so that we are ready to go again.
             this.timer.reset();
         }
 
         if (gamepad2.a) {
+            // This is a fix for the slide sometimes thinking the zero is set at a height higher than the actual zero.
+            // It's just a kill switch that will set the position back to zero for you.
             this.controller.slide.fullRetract();
         }
-        if (gamepad1.b){
-            this.controller.slide.fullExtend();
-        }
-        telemetry.addData("linear slide target position:", this.controller.slide.targetTicks);
-        telemetry.addData("timer value:", timer.milliseconds());
         this.telemetry.update();
     }
 }
