@@ -232,12 +232,16 @@ public abstract class BaseAutonomous9511 extends LinearOpMode {
 
     protected void grabbingPosition(){
         this.controller.slide.fullRetract();
-        this.controller.claw.invert();
+        this.controller.claw.expand();
     }
 
-    protected void scoringPosition(){
+    protected void scoringPosition(boolean drop){
         this.controller.slide.fullExtend();
-        this.controller.claw.invert();
+        if (drop){
+            this.controller.claw.expand();
+        } if (!drop){
+            this.controller.claw.grab();
+        }
     }
 
     protected void forward (double power, long time){

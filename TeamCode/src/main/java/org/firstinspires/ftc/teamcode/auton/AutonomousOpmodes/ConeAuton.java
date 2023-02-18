@@ -10,37 +10,24 @@ public class ConeAuton extends BaseAutonomous9511 {
         waitForStartVisionPipeline();
         telemetryVision();
         detectSleeve();
-        scoringPosition();
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .strafeRight(12)
-                .build());
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .forward(5)
-                .build());
 
-        scoringPosition();
+        scoringPosition(false);
 
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .back(5)
-                .build());
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .strafeLeft(12)
-                .build());
+        right(0.25, 1);
+        forward(0.2,1);
 
-        this.controller.claw.invert();
-        this.controller.slide.fullRetract();
-        
+        scoringPosition(true);
 
-        if (PARKINGTARGET == 1) {
-            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .strafeLeft(24).build());
-        } else if (PARKINGTARGET == 3) {
-            drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .strafeRight(24)
-                    .build());
+        back(0.2,1);
+        left(0.25, 1);
+
+        grabbingPosition();
+
+        if (PARKINGTARGET == 1){
+            left(0.5,1);
+        } else if (PARKINGTARGET == 3){
+            right(0.5,1);
         }
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .forward(21)
-                .build());
+        forward(0.4,1);
     }
 }
